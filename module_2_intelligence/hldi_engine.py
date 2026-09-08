@@ -32,11 +32,13 @@ class HLDIEngine:
         demand_growth = demand_dict.get(biz_key, 0.5)
         spending_idx = block.get("cpi_spending_index", 50.0)
 
-        density_penalty = min(density * 2.0, 30.0)
-        demand_score = demand_growth * 50.0
-        spending_score = (spending_idx / 100.0) * 30.0
+        # Calibrated MoSPI HLDI Formulation:
+        # High demand signal (up to 55 pts) + High CPI spending (up to 35 pts) - Saturation penalty (density)
+        demand_score = demand_growth * 55.0
+        spending_score = (spending_idx / 100.0) * 35.0
+        density_penalty = min(density * 1.2, 25.0)
 
-        raw_score = demand_score + spending_score - density_penalty + 15.0
+        raw_score = demand_score + spending_score - density_penalty + 10.0
         hldi_score = int(max(5, min(95, round(raw_score))))
 
         explanation, suggested_alt = self._generate_explanation_and_alt(
@@ -59,9 +61,9 @@ class HLDIEngine:
         self, biz_key: str, score: int, density: int, demand: float, spending: float,
         all_densities: Dict[str, int], all_demands: Dict[str, float]
     ) -> Tuple[str, Optional[str]]:
-        if score >= 70:
+        if score >= 65:
             exp = (f"High demand signal ({int(demand*100)}%) and strong local spending trend ({spending}/100) "
-                   f"with low-to-moderate competition ({density} existing units) in this block.")
+                   f"with manageable enterprise density ({density} existing units) in this block.")
             alt = None
         elif score >= 45:
             exp = (f"Moderate feasibility. Stable local spending, but existing competition ({density} units) "
