@@ -1,0 +1,47 @@
+{
+  "districts": {
+    "DIST_01": {
+      "name": "Cuddalore",
+      "blocks": {
+        "BLK_101": {
+          "name": "Block Alpha",
+          "cpi_food_inflation_trend": 0.08,
+          "cpi_spending_index": 78.5,
+          "enterprise_density": {
+            "grocery": 12,
+            "pottery": 2,
+            "tailoring": 8,
+            "carpentry": 3,
+            "electronics_repair": 1
+          },
+          "demand_growth_signals": {
+            "grocery": 0.85,
+            "pottery": 0.60,
+            "tailoring": 0.40,
+            "carpentry": 0.75,
+            "electronics_repair": 0.90
+          }
+        },
+        "BLK_102": {
+          "name": "Block Beta",
+          "cpi_food_inflation_trend": 0.03,
+          "cpi_spending_index": 45.0,
+          "enterprise_density": {
+            "grocery": 45,
+            "pottery": 1,
+            "tailoring": 20,
+            "carpentry": 10,
+            "electronics_repair": 5
+          },
+          "demand_growth_signals": {
+            "grocery": 0.20,
+            "pottery": 0.50,
+            "tailoring": 0.25,
+            "carpentry": 0.30,
+            "electronics_repair": 0.35
+          }
+        }
+      }
+    }
+  }
+}
